@@ -1,0 +1,92 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="theme-color" content="#18342b">
+  <title>节律｜个人冲刺计划</title>
+  <meta name="description" content="把健康、工作、学习和生活目标拆成每天都能完成的节律。">
+  <style>
+    :root{--ink:#17251f;--muted:#6f7a74;--paper:#f2f0e9;--card:#fffdf8;--line:#dddcd4;--green:#14634d;--orange:#df7446}
+    *{box-sizing:border-box}body{margin:0;background:var(--paper);color:var(--ink);font-family:Inter,"PingFang SC","Microsoft YaHei",system-ui,sans-serif}
+    button,input,select,textarea{font:inherit}button{color:inherit;cursor:pointer}.app{min-height:100vh;display:grid;grid-template-columns:238px 1fr}
+    aside{position:sticky;top:0;height:100vh;padding:30px 22px;background:#18342b;color:#f9f7ef;display:flex;flex-direction:column}
+    .brand{display:flex;gap:12px;align-items:center;padding:0 8px 30px}.mark{width:38px;height:38px;display:grid;place-items:center;border:1px solid #b7ccbf;border-radius:12px 4px;font:700 19px Georgia}
+    .brand strong,.brand small{display:block}.brand strong{font-size:18px;letter-spacing:.12em}.brand small{color:#aabcb3;font-size:11px}
+    nav{display:grid;gap:5px}nav button{border:0;background:transparent;color:#b8c8c0;text-align:left;padding:12px 14px;border-radius:11px}nav button.active{background:#2b4a40;color:white}
+    .side-plan{margin-top:auto;border-top:1px solid #365148;padding:20px 8px 0;display:grid;gap:8px}.side-plan small,.side-plan span{color:#9fb1a8;font-size:11px}.mini,.bar{height:6px;background:#314d43;border-radius:5px;overflow:hidden}.mini i,.bar i{display:block;height:100%;background:var(--orange)}
+    .new{border:1px solid #476159;color:#e8eee9;background:transparent;border-radius:10px;margin-top:18px;padding:10px}
+    main{min-width:0;padding:42px clamp(24px,4vw,68px) 80px}.top{max-width:1240px;margin:0 auto 30px;display:flex;justify-content:space-between;align-items:end;gap:30px}
+    .kicker,.tag{color:var(--orange);font-size:11px;font-weight:750;letter-spacing:.16em;text-transform:uppercase}h1{font:500 clamp(36px,5vw,62px)/1.04 Georgia,"Songti SC",serif;margin:8px 0 0;letter-spacing:-.04em}h2{font:550 26px/1.2 Georgia,"Songti SC",serif;margin:8px 0}
+    .stepper{display:flex;align-items:center;gap:13px;background:var(--card);border:1px solid var(--line);border-radius:14px;padding:6px;white-space:nowrap}.stepper button{width:34px;height:34px;border:0;background:#eeece5;border-radius:9px;font-size:22px}.stepper span{font-size:13px;color:var(--muted)}
+    .grid{max-width:1240px;margin:auto;display:grid;grid-template-columns:minmax(0,1.65fr) minmax(270px,.8fr);gap:20px}.card{background:var(--card);border:1px solid var(--line);border-radius:22px;padding:26px;box-shadow:0 10px 35px rgba(30,43,37,.035)}.head{display:flex;justify-content:space-between;align-items:start}.score{border:1px solid #cfd7d1;border-radius:99px;padding:7px 11px;font-size:12px;color:var(--green);font-weight:700}
+    .tasks{margin-top:16px}.task{width:100%;display:flex;align-items:center;gap:14px;text-align:left;background:transparent;border:0;border-top:1px solid #e8e5dd;padding:15px 2px}.task i{width:23px;height:23px;border:1.5px solid #a5aca7;border-radius:8px;display:grid;place-items:center;font-style:normal;flex:none}.task small{display:block;color:var(--muted);font-size:9px;letter-spacing:.12em}.task.done span{color:#89918c;text-decoration:line-through}.task.done i{color:white;background:var(--green);border-color:var(--green)}
+    .add{display:flex;gap:8px;margin-top:12px}input,select,textarea{width:100%;border:1px solid #d8d7d0;background:#f7f5ef;border-radius:10px;padding:11px 12px;outline:none}.add button,.primary{border:0;background:var(--green);color:white;border-radius:10px;padding:10px 16px;white-space:nowrap}
+    .pulse{display:flex;flex-direction:column;align-items:center;text-align:center;background:#e9efe9}.ring{width:158px;height:158px;margin:24px 0 10px;border-radius:50%;display:grid;place-items:center;background:conic-gradient(var(--green) var(--v),#cad6cf 0);position:relative}.ring:before{content:"";position:absolute;inset:11px;background:#e9efe9;border-radius:50%}.ring b{z-index:1;font:500 48px Georgia}.pulse p,.muted{color:var(--muted);font-size:13px;line-height:1.65}
+    .summary{display:flex;gap:20px;margin:18px 0;padding:15px 0;border-block:1px solid #e7e4dc}.summary div{flex:1}.summary b{font:500 27px Georgia}.summary span{display:block;color:var(--muted);font-size:11px}.meal{display:grid;grid-template-columns:.8fr 1fr 1fr;gap:9px}.check{grid-column:1/3;font-size:12px;color:var(--muted);display:flex;align-items:center;gap:6px}.check input{width:auto}.feedback{margin-top:16px;padding:14px 16px;border-radius:12px;font-size:13px}.feedback.green{background:#e5f0e8;color:#17533d}.feedback.amber{background:#fff0d5;color:#78511b}.feedback.red{background:#f8e1da;color:#813e2e}
+    textarea{min-height:120px;resize:vertical;margin-top:12px}.metric-row{display:flex;gap:10px;margin-top:15px}.metric{flex:1;background:#efeee8;border-radius:12px;padding:14px}.metric b{display:block;font:500 28px Georgia}.metric small{color:var(--muted)}
+    .days{max-width:1240px;margin:auto;display:grid;grid-template-columns:repeat(7,1fr);gap:12px}.day{min-height:115px;background:var(--card);border:1px solid var(--line);border-radius:16px;padding:15px;text-align:left;display:flex;flex-direction:column}.day span{color:var(--muted);font-size:9px;letter-spacing:.1em}.day b{font:500 27px Georgia;margin:auto 0 10px}.day.current{border-color:var(--green);box-shadow:inset 0 0 0 1px var(--green)}
+    .review{max-width:1240px;margin:auto;display:grid;grid-template-columns:repeat(3,1fr);gap:20px}.review .hero{grid-column:span 2;background:#e9efe9}.stat b{display:block;font:500 43px Georgia;margin:20px 0}.notes{grid-column:1/-1}.note{display:grid;grid-template-columns:80px 1fr;border-top:1px solid #e7e4dc;padding:14px 0}.note span{color:var(--muted);font-size:11px}.note p{margin:0}
+    .modal-bg{position:fixed;inset:0;background:#0f1f1988;display:grid;place-items:center;padding:22px;z-index:10}.modal{width:min(620px,100%);background:var(--card);border-radius:24px;padding:32px}.modal label{display:grid;gap:7px;margin-top:14px;color:var(--muted);font-size:12px}.form-row{display:grid;grid-template-columns:1fr 1fr;gap:12px}.hidden{display:none!important}
+    @media(max-width:850px){.app{grid-template-columns:76px 1fr}aside{padding:24px 12px}.brand div,.side-plan,.new{display:none}.brand{padding-inline:0}nav button{font-size:0;text-align:center}nav button:before{font-size:18px}.days{grid-template-columns:repeat(4,1fr)}}
+    @media(max-width:650px){.app{display:block;padding-bottom:65px}aside{position:fixed;inset:auto 0 0;width:100%;height:60px;z-index:5;flex-direction:row;padding:7px 14px}.brand{display:none}nav{width:100%;grid-template-columns:repeat(3,1fr)}nav button{font-size:13px;text-align:center}.workspace{padding:28px 16px 40px}.top{display:block}.stepper{margin-top:18px;width:max-content}.grid,.review{grid-template-columns:1fr}.pulse{order:-1}.meal{grid-template-columns:1fr 1fr}.meal select,.meal .primary,.check{grid-column:1/-1}.days{grid-template-columns:repeat(3,1fr)}.review .hero,.notes{grid-column:auto}.form-row{grid-template-columns:1fr}}
+  </style>
+</head>
+<body>
+<div class="app">
+  <aside>
+    <div class="brand"><span class="mark">R</span><div><strong>节律</strong><small>把计划变成每天</small></div></div>
+    <nav><button data-tab="today" class="active">◉　今天</button><button data-tab="plan">▦　计划</button><button data-tab="review">↗　复盘</button></nav>
+    <div class="side-plan"><small>当前计划</small><strong id="sideName"></strong><div class="mini"><i id="sideBar"></i></div><span id="sideRate"></span></div>
+    <button class="new" id="newPlan">＋ 新建计划</button>
+  </aside>
+  <main class="workspace">
+    <header class="top"><div><span class="kicker" id="planName"></span><h1 id="headline">把今天做好。</h1></div><div class="stepper"><button id="prev">‹</button><span>第 <b id="dayNo">1</b> / <i id="dayTotal">21</i> 天</span><button id="next">›</button></div></header>
+    <section id="today" class="grid">
+      <div class="card"><div class="head"><div><span class="tag">今日重点</span><h2>完成清单</h2></div><span class="score" id="todayRate">0%</span></div><div class="tasks" id="tasks"></div><div class="add"><input id="newTask" placeholder="添加今天自己的任务…"><button id="addTask">添加</button></div></div>
+      <div class="card pulse"><span class="tag">今日节奏</span><div class="ring" id="ring"><b id="ringText">0%</b></div><p id="encourage">先完成最重要的一项，今天就会开始转动。</p></div>
+      <div class="card"><div class="head"><div><span class="tag">可选模块</span><h2>餐食反馈</h2></div></div><div class="summary"><div><b id="calNow">0</b><span id="calGoal"></span></div><div><b id="proteinNow">0</b><span id="proteinGoal"></span></div></div><div class="meal"><select id="mealType"><option>早餐</option><option selected>午餐</option><option>加餐</option><option>晚餐</option></select><input id="mealCal" inputmode="numeric" placeholder="热量 kcal"><input id="mealPro" inputmode="numeric" placeholder="蛋白质 g"><label class="check"><input id="veg" type="checkbox" checked>含足量蔬菜</label><button class="primary" id="evaluate">评估并记录</button></div><div id="feedback"></div></div>
+      <div class="card"><span class="tag">留给明天</span><h2>一句话复盘</h2><textarea id="note" placeholder="今天什么有效？明天只改变哪一件事？"></textarea><div class="metric-row"><div class="metric"><b id="allRate">0%</b><small>整体完成</small></div><div class="metric"><input id="weight" inputmode="decimal" placeholder="记录一个指标"><small>体重或自定义数值</small></div></div></div>
+    </section>
+    <section id="plan" class="days hidden"></section>
+    <section id="review" class="review hidden"><div class="card hero"><span class="tag">全周期</span><h2 id="reviewTitle"></h2><p class="muted">完成率不是成绩单，而是帮助你判断计划强度是否合适的信号。</p></div><div class="card stat"><small>任务完成率</small><b id="reviewRate"></b><div class="bar"><i id="reviewBar"></i></div></div><div class="card stat"><small>当前进度</small><b id="reviewDay"></b></div><div class="card notes"><h2>复盘记录</h2><div id="notes"></div></div></section>
+  </main>
+</div>
+<div class="modal-bg hidden" id="modal"><form class="modal" id="createForm"><span class="tag">从一个清晰的周期开始</span><h2>创建新计划</h2><label>计划名称<input name="name" value="我的21天冲刺"></label><div class="form-row"><label>周期天数<input name="days" type="number" min="3" max="90" value="21"></label><label>每日热量目标<input name="calories" type="number" min="0" value="2200"></label></div><div class="form-row"><label>蛋白质目标（克）<input name="protein" type="number" min="0" value="180"></label><label>步数目标<input name="steps" type="number" min="0" value="12000"></label></div><p class="muted">创建新计划会替换当前计划。</p><div class="form-row"><button type="button" id="cancel">取消</button><button class="primary" type="submit">创建并开始</button></div></form></div>
+<script>
+const KEY="rhythm-static-v1";
+const seed=[
+ ["45分钟低强度有氧","完成一次力量训练","推进核心项目90分钟","完成一项研究或学习任务"],
+ ["户外快走60分钟","整理并执行今日餐食","完成一个可验收成果","阅读并记录3条笔记"],
+ ["核心与活动度训练","复盘身体状态","修改一处关键结构","整理问题与假设"]
+];
+function makePlan(name="21天集中冲刺",days=21,calories=2200,protein=180,steps=12000){
+ const logs={};for(let d=1;d<=days;d++)logs[d]={tasks:seed[(d-1)%seed.length].map((text,i)=>({id:d+"-"+i,text,area:i<2?"健康":"项目",done:false})),calories:0,protein:0,note:"",weight:""};
+ return{name,days,currentDay:1,calorieTarget:calories,proteinTarget:protein,stepsTarget:steps,logs};
+}
+let plan;try{plan=JSON.parse(localStorage.getItem(KEY))||makePlan()}catch(e){plan=makePlan()}
+let active="today";const $=id=>document.getElementById(id);const save=()=>localStorage.setItem(KEY,JSON.stringify(plan));
+function rates(){const all=Object.values(plan.logs).flatMap(x=>x.tasks),done=all.filter(x=>x.done).length,log=plan.logs[plan.currentDay];return{all,done,total:all.length,overall:all.length?Math.round(done/all.length*100):0,today:log.tasks.length?Math.round(log.tasks.filter(x=>x.done).length/log.tasks.length*100):0}}
+function render(){
+ const log=plan.logs[plan.currentDay],r=rates();
+ $("planName").textContent=$("sideName").textContent=plan.name;$("dayNo").textContent=plan.currentDay;$("dayTotal").textContent=plan.days;$("sideRate").textContent=r.overall+"% 总进度";$("sideBar").style.width=r.overall+"%";$("todayRate").textContent=$("allRate").textContent=r.today+"%";
+ $("ring").style.setProperty("--v",r.today*3.6+"deg");$("ringText").textContent=r.today+"%";$("encourage").textContent=r.today<50?"先完成最重要的一项，今天就会开始转动。":r.today<100?"已经进入状态，保持这个节奏。":"今天的承诺已经兑现。";
+ $("tasks").innerHTML=log.tasks.map(t=>`<button class="task ${t.done?"done":""}" data-id="${t.id}"><i>${t.done?"✓":""}</i><span><small>${t.area}</small>${t.text}</span></button>`).join("");
+ $("calNow").textContent=log.calories;$("calGoal").textContent="/ "+plan.calorieTarget+" kcal";$("proteinNow").textContent=log.protein;$("proteinGoal").textContent="/ "+plan.proteinTarget+" g 蛋白质";$("note").value=log.note||"";$("weight").value=log.weight||"";
+ $("plan").innerHTML=Array.from({length:plan.days},(_,i)=>{const d=i+1,l=plan.logs[d],n=l.tasks.filter(t=>t.done).length;return`<button class="day ${d===plan.currentDay?"current":""}" data-day="${d}"><span>DAY ${String(d).padStart(2,"0")}</span><b>${n}/${l.tasks.length}</b><div class="bar"><i style="width:${n/l.tasks.length*100}%"></i></div></button>`}).join("");
+ $("reviewTitle").textContent=r.done+" 项承诺已经兑现";$("reviewRate").textContent=r.overall+"%";$("reviewBar").style.width=r.overall+"%";$("reviewDay").textContent=plan.currentDay+" / "+plan.days+" 天";const noteList=Object.entries(plan.logs).filter(([,x])=>x.note);$("notes").innerHTML=noteList.length?noteList.map(([d,x])=>`<div class="note"><span>第${d}天</span><p>${x.note}</p></div>`).join(""):'<p class="muted">还没有复盘。每天留下一句话，就会在这里形成行动日志。</p>';
+ save();
+}
+function show(tab){active=tab;["today","plan","review"].forEach(id=>$(id).classList.toggle("hidden",id!==tab));document.querySelectorAll("nav button").forEach(b=>b.classList.toggle("active",b.dataset.tab===tab));$("headline").textContent=tab==="today"?"把今天做好。":tab==="plan"?"看清整段旅程。":"让数据帮你调整。"}
+document.addEventListener("click",e=>{const task=e.target.closest(".task");if(task){const l=plan.logs[plan.currentDay],t=l.tasks.find(x=>x.id===task.dataset.id);t.done=!t.done;render()}const day=e.target.closest(".day");if(day){plan.currentDay=+day.dataset.day;show("today");render()}});
+document.querySelectorAll("nav button").forEach(b=>b.onclick=()=>show(b.dataset.tab));
+$("prev").onclick=()=>{plan.currentDay=Math.max(1,plan.currentDay-1);render()};$("next").onclick=()=>{plan.currentDay=Math.min(plan.days,plan.currentDay+1);render()};
+$("addTask").onclick=()=>{const v=$("newTask").value.trim();if(!v)return;plan.logs[plan.currentDay].tasks.push({id:Date.now()+"",text:v,area:"自定义",done:false});$("newTask").value="";render()};
+$("newTask").onkeydown=e=>{if(e.key==="Enter")$("addTask").click()};
+$("note").oninput=e=>{plan.logs[plan.currentDay].note=e.target.value;save()};$("weight").oninput=e=>{plan.logs[plan.currentDay].weight=e.target.value;save()};
+$("evaluate").onclick=()=>{const cal=+$("mealCal").value,pro=+$("mealPro").value,type=$("mealType").value,share=type==="加餐"?.12:type==="早餐"?.24:.32,cg=plan.calorieTarget*share,pg=plan.proteinTarget*share;let tone="green",title="这餐整体合适",text="热量与蛋白质处于当前计划的合理范围。";if(!cal||!pro){tone="amber";title="还缺一点信息";text="请填写大致热量和蛋白质。"}else if(cal>cg*1.25){tone="red";title="热量偏高";text=`比本餐参考值高约 ${Math.round(cal-cg)} 千卡，优先检查油、酱料和主食。`}else if(cal<cg*.68){tone="amber";title="可能吃得太少";text="如有训练或高强度工作，建议补充主食或低脂蛋白质。"}else if(pro<pg*.72){tone="amber";title="蛋白质不足";text=`建议再补约 ${Math.ceil(pg-pro)} 克蛋白质。`}else if(type!=="加餐"&&!$("veg").checked){tone="amber";title="主体合适，蔬菜不足";text="增加一大份非淀粉蔬菜。"}if(cal&&pro){const l=plan.logs[plan.currentDay];l.calories+=cal;l.protein+=pro}$("feedback").className="feedback "+tone;$("feedback").innerHTML=`<strong>${title}</strong><p>${text}</p>`;render()};
+$("newPlan").onclick=()=>$("modal").classList.remove("hidden");$("cancel").onclick=()=>$("modal").classList.add("hidden");$("createForm").onsubmit=e=>{e.preventDefault();const f=new FormData(e.target);plan=makePlan(f.get("name")||"我的计划",Math.max(3,Math.min(90,+f.get("days")||21)),+f.get("calories")||0,+f.get("protein")||0,+f.get("steps")||0);$("modal").classList.add("hidden");show("today");render()};
+render();
+</script>
+</body>
+</html>
