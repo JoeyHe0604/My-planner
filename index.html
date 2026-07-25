@@ -28,8 +28,9 @@
     .days{max-width:1240px;margin:auto;display:grid;grid-template-columns:repeat(7,1fr);gap:12px}.day{min-height:115px;background:var(--card);border:1px solid var(--line);border-radius:16px;padding:15px;text-align:left;display:flex;flex-direction:column}.day span{color:var(--muted);font-size:9px;letter-spacing:.1em}.day b{font:500 27px Georgia;margin:auto 0 10px}.day.current{border-color:var(--green);box-shadow:inset 0 0 0 1px var(--green)}
     .review{max-width:1240px;margin:auto;display:grid;grid-template-columns:repeat(3,1fr);gap:20px}.review .hero{grid-column:span 2;background:#e9efe9}.stat b{display:block;font:500 43px Georgia;margin:20px 0}.notes{grid-column:1/-1}.note{display:grid;grid-template-columns:80px 1fr;border-top:1px solid #e7e4dc;padding:14px 0}.note span{color:var(--muted);font-size:11px}.note p{margin:0}
     .capture{grid-column:1/-1}.capture-grid{display:grid;grid-template-columns:minmax(0,1.4fr) minmax(260px,.6fr);gap:18px;margin-top:15px}.capture textarea{min-height:104px;margin:0}.capture-actions{display:flex;flex-wrap:wrap;gap:9px;margin-top:10px}.upload{display:inline-flex;align-items:center;gap:8px;border:1px solid #d8d7d0;background:#f7f5ef;border-radius:10px;padding:10px 13px;font-size:12px;cursor:pointer}.upload input{display:none}.preview{min-height:150px;border:1px dashed #c9ccc6;border-radius:15px;background:#f4f3ed;display:grid;place-items:center;overflow:hidden;color:var(--muted);font-size:12px;text-align:center;padding:12px}.preview img{width:100%;height:180px;object-fit:cover;border-radius:10px}.ai-note{margin-top:10px;color:var(--muted);font-size:11px}.records{margin-top:18px;border-top:1px solid #e7e4dc}.record{display:grid;grid-template-columns:92px 1fr auto;gap:12px;align-items:start;padding:14px 0;border-bottom:1px solid #ebe8e0}.module{width:max-content;border-radius:99px;padding:5px 9px;background:#e5eee8;color:var(--green);font-size:10px;font-weight:750}.record p{margin:0 0 5px;font-size:13px;line-height:1.55}.record small{color:var(--muted)}.record-actions{display:flex;gap:6px}.ghost{border:1px solid #d3d6d1;background:transparent;border-radius:8px;padding:7px 9px;font-size:11px}.record-status{margin-top:12px;padding:11px 13px;border-radius:10px;background:#e7efe9;color:#285442;font-size:12px}.record-status.warn{background:#fff0d5;color:#78511b}
+    .module-panel{grid-column:1/-1}.scales{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin-top:16px}.scale{border:1px solid #e0ded7;background:#f7f5ef;border-radius:14px;padding:14px}.scale-head{display:flex;justify-content:space-between;gap:8px;align-items:center}.scale-head strong{font-size:13px}.scale-head span{color:var(--muted);font-size:10px}.scale-value{margin:14px 0 9px;font:500 25px Georgia}.scale-value small{font:400 10px Inter,"PingFang SC",sans-serif;color:var(--muted)}.scale .bar{background:#dedfd9}.scale.complete{border-color:#aac1b4;background:#edf3ee}.scale.over{border-color:#e7b59d;background:#fff3ed}.scale-note{color:var(--muted);font-size:10px;margin-top:7px}
     .modal-bg{position:fixed;inset:0;background:#0f1f1988;display:grid;place-items:center;padding:22px;z-index:10}.modal{width:min(620px,100%);background:var(--card);border-radius:24px;padding:32px}.modal label{display:grid;gap:7px;margin-top:14px;color:var(--muted);font-size:12px}.form-row{display:grid;grid-template-columns:1fr 1fr;gap:12px}.hidden{display:none!important}
-    @media(max-width:850px){.app{grid-template-columns:76px 1fr}aside{padding:24px 12px}.brand div,.side-plan,.new{display:none}.brand{padding-inline:0}nav button{font-size:0;text-align:center}nav button:before{font-size:18px}.days{grid-template-columns:repeat(4,1fr)}}
+    @media(max-width:1050px){.scales{grid-template-columns:repeat(2,1fr)}}@media(max-width:850px){.app{grid-template-columns:76px 1fr}aside{padding:24px 12px}.brand div,.side-plan,.new{display:none}.brand{padding-inline:0}nav button{font-size:0;text-align:center}nav button:before{font-size:18px}.days{grid-template-columns:repeat(4,1fr)}}
     @media(max-width:650px){.app{display:block;padding-bottom:65px}aside{position:fixed;inset:auto 0 0;width:100%;height:60px;z-index:5;flex-direction:row;padding:7px 14px}.brand{display:none}nav{width:100%;grid-template-columns:repeat(3,1fr)}nav button{font-size:13px;text-align:center}.workspace{padding:28px 16px 40px}.top{display:block}.stepper{margin-top:18px;width:max-content}.grid,.review,.capture-grid{grid-template-columns:1fr}.pulse{order:-1}.meal{grid-template-columns:1fr 1fr}.meal select,.meal .primary,.check{grid-column:1/-1}.days{grid-template-columns:repeat(3,1fr)}.review .hero,.notes{grid-column:auto}.form-row{grid-template-columns:1fr}.record{grid-template-columns:1fr}.record-actions{justify-content:flex-start}}
   </style>
 </head>
@@ -45,6 +46,7 @@
     <header class="top"><div><span class="kicker" id="planName"></span><h1 id="headline">把今天做好。</h1></div><div class="stepper"><button id="prev">‹</button><span>第 <b id="dayNo">1</b> / <i id="dayTotal">21</i> 天</span><button id="next">›</button></div></header>
     <section id="today" class="grid">
       <div class="card capture"><div class="head"><div><span class="tag">智能记录</span><h2>今天做了什么？</h2></div><span class="score">自动归类</span></div><div class="capture-grid"><div><textarea id="dailyInput" placeholder="例如：上午修改了剧本第二幕，下午跳绳40分钟，晚餐吃了鸡胸肉、米饭和西兰花。"></textarea><div class="capture-actions"><button class="primary" id="analyzeRecord">分析并记录</button><label class="upload">＋ 上传餐食照片<input id="foodPhoto" type="file" accept="image/*" capture="environment"></label><button class="ghost" id="clearCapture">清空</button></div><div class="ai-note">文字会立即在本机归类；照片识别接口未连接时，可配合食物描述生成热量区间。</div><div id="recordStatus"></div></div><div class="preview" id="photoPreview">上传餐食照片后将在这里预览<br>图片不会保存在浏览器记录中</div></div><div class="records" id="records"></div></div>
+      <div class="card module-panel"><div class="head"><div><span class="tag">模块量表</span><h2>今天的七个维度</h2></div><span class="score">自动累计</span></div><div class="scales" id="moduleScales"></div></div>
       <div class="card"><div class="head"><div><span class="tag">今日重点</span><h2>完成清单</h2></div><span class="score" id="todayRate">0%</span></div><div class="tasks" id="tasks"></div><div class="add"><input id="newTask" placeholder="添加今天自己的任务…"><button id="addTask">添加</button></div></div>
       <div class="card pulse"><span class="tag">今日节奏</span><div class="ring" id="ring"><b id="ringText">0%</b></div><p id="encourage">先完成最重要的一项，今天就会开始转动。</p></div>
       <div class="card"><div class="head"><div><span class="tag">可选模块</span><h2>餐食反馈</h2></div></div><div class="summary"><div><b id="calNow">0</b><span id="calGoal"></span></div><div><b id="proteinNow">0</b><span id="proteinGoal"></span></div></div><div class="meal"><select id="mealType"><option>早餐</option><option selected>午餐</option><option>加餐</option><option>晚餐</option></select><input id="mealCal" inputmode="numeric" placeholder="热量 kcal"><input id="mealPro" inputmode="numeric" placeholder="蛋白质 g"><label class="check"><input id="veg" type="checkbox" checked>含足量蔬菜</label><button class="primary" id="evaluate">评估并记录</button></div><div id="feedback"></div></div>
@@ -54,7 +56,7 @@
     <section id="review" class="review hidden"><div class="card hero"><span class="tag">全周期</span><h2 id="reviewTitle"></h2><p class="muted">完成率不是成绩单，而是帮助你判断计划强度是否合适的信号。</p></div><div class="card stat"><small>任务完成率</small><b id="reviewRate"></b><div class="bar"><i id="reviewBar"></i></div></div><div class="card stat"><small>当前进度</small><b id="reviewDay"></b></div><div class="card notes"><h2>复盘记录</h2><div id="notes"></div></div></section>
   </main>
 </div>
-<div class="modal-bg hidden" id="modal"><form class="modal" id="createForm"><span class="tag">从一个清晰的周期开始</span><h2>创建新计划</h2><label>计划名称<input name="name" value="我的21天冲刺"></label><div class="form-row"><label>周期天数<input name="days" type="number" min="3" max="90" value="21"></label><label>每日热量目标<input name="calories" type="number" min="0" value="2200"></label></div><div class="form-row"><label>蛋白质目标（克）<input name="protein" type="number" min="0" value="180"></label><label>步数目标<input name="steps" type="number" min="0" value="12000"></label></div><p class="muted">创建新计划会替换当前计划。</p><div class="form-row"><button type="button" id="cancel">取消</button><button class="primary" type="submit">创建并开始</button></div></form></div>
+<div class="modal-bg hidden" id="modal"><form class="modal" id="createForm"><span class="tag">从一个清晰的周期开始</span><h2>创建新计划</h2><label>计划名称<input name="name" value="我的21天冲刺"></label><div class="form-row"><label>周期天数<input name="days" type="number" min="3" max="90" value="21"></label><label>每日热量目标<input name="calories" type="number" min="0" value="2200"></label></div><div class="form-row"><label>蛋白质目标（克）<input name="protein" type="number" min="0" value="180"></label><label>睡眠目标（小时）<input name="sleep" type="number" min="0" max="16" step=".5" value="8"></label></div><div class="form-row"><label>有氧目标（分钟）<input name="cardio" type="number" min="0" value="45"></label><label>力量目标（分钟）<input name="strength" type="number" min="0" value="45"></label></div><div class="form-row"><label>工作目标（分钟）<input name="work" type="number" min="0" value="180"></label><label>学习目标（分钟）<input name="study" type="number" min="0" value="60"></label></div><label>生活事项目标（项）<input name="life" type="number" min="0" value="2"></label><p class="muted">创建新计划会替换当前计划。</p><div class="form-row"><button type="button" id="cancel">取消</button><button class="primary" type="submit">创建并开始</button></div></form></div>
 <script>
 const KEY="my-planner-v2",OLD_KEY="rhythm-static-v1";
 const AI_ENDPOINT=window.MY_PLANNER_AI_ENDPOINT||"";
@@ -63,15 +65,25 @@ const seed=[
  ["户外快走60分钟","整理并执行今日餐食","完成一个可验收成果","阅读并记录3条笔记"],
  ["核心与活动度训练","复盘身体状态","修改一处关键结构","整理问题与假设"]
 ];
-function makePlan(name="21天集中冲刺",days=21,calories=2200,protein=180,steps=12000){
+const defaultGoals={sleep:8,cardio:45,strength:45,work:180,study:60,life:2};
+function makePlan(name="21天集中冲刺",days=21,calories=2200,protein=180,moduleGoals=defaultGoals){
  const logs={};for(let d=1;d<=days;d++)logs[d]={tasks:seed[(d-1)%seed.length].map((text,i)=>({id:d+"-"+i,text,area:i<2?"健康":"项目",done:false})),calories:0,protein:0,note:"",weight:"",records:[]};
- return{name,days,currentDay:1,calorieTarget:calories,proteinTarget:protein,stepsTarget:steps,logs};
+ return{name,days,currentDay:1,calorieTarget:calories,proteinTarget:protein,moduleGoals:{...defaultGoals,...moduleGoals},logs};
+}
+function normalizeModule(name,text=""){
+ if(["睡眠","餐食","有氧运动","力量训练","工作","学习","生活"].includes(name))return name;
+ if(name==="运动")return/力量|健身|深蹲|卧推|硬拉|俯卧撑|器械/.test(text)?"力量训练":"有氧运动";
+ if(name==="恢复")return/睡|午休|午睡/.test(text)?"睡眠":"生活";
+ if(name==="剧本"||name==="科研")return "工作";
+ return "生活";
 }
 function hydratePlan(value){
  const next=value||makePlan();
+ next.moduleGoals={...defaultGoals,...(next.moduleGoals||{})};
  for(let d=1;d<=next.days;d++){
   if(!next.logs[d])next.logs[d]=makePlan("x",1).logs[1];
   if(!Array.isArray(next.logs[d].records))next.logs[d].records=[];
+  next.logs[d].records.forEach(record=>record.module=normalizeModule(record.module,record.text));
  }
  return next;
 }
@@ -80,14 +92,13 @@ let active="today",photoData="",photoName="";
 const $=id=>document.getElementById(id),save=()=>localStorage.setItem(KEY,JSON.stringify(plan));
 const esc=value=>String(value??"").replace(/[&<>"']/g,char=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[char]));
 const modules=[
- {name:"餐食",keys:["早餐","午餐","晚餐","加餐","吃了","喝了","米饭","面","鸡胸","牛肉","蔬菜","水果","咖啡","奶茶","蛋白"]},
- {name:"运动",keys:["训练","健身","跑步","跳绳","有氧","力量","深蹲","俯卧撑","走路","步行","瑜伽","拉伸","骑行","游泳"]},
- {name:"剧本",keys:["剧本","第二幕","第一幕","第三幕","场景","对白","角色","情节","分场","台词","修改结构"]},
- {name:"科研",keys:["科研","研究","论文","文献","实验","假设","课题","数据","模型","方法","构思"]},
- {name:"工作",keys:["工作","项目","会议","邮件","汇报","方案","交付","客户","整理"]},
- {name:"学习",keys:["学习","阅读","课程","笔记","背诵","练习","复习"]},
- {name:"恢复",keys:["睡眠","午睡","休息","冥想","泡沫轴","恢复","早睡"]},
- {name:"生活",keys:["家务","打扫","购物","洗衣","做饭","散步","社交"]}
+ {name:"睡眠",strong:["睡了","睡眠","入睡","起床","午睡","午休","早睡","熬夜"],keys:["休息","醒来"]},
+ {name:"力量训练",strong:["力量训练","抗阻训练","举铁","深蹲","卧推","硬拉","引体向上"],keys:["力量","健身","俯卧撑","器械","哑铃","杠铃","核心训练"]},
+ {name:"有氧运动",strong:["有氧运动","跑步","跳绳","游泳","骑行","椭圆机"],keys:["有氧","快走","步行","散步","爬楼","划船机"]},
+ {name:"工作",strong:["工作","剧本","科研","项目","会议","交付","汇报"],keys:["邮件","方案","客户","场景","对白","角色","情节","分场","台词","实验","课题","数据分析","构思"]},
+ {name:"学习",strong:["学习","上课","复习","课程","看文献"],keys:["阅读","论文","文献","笔记","背诵","练习","读书"]},
+ {name:"生活",strong:["家务","打扫","购物","洗衣","做饭","社交"],keys:["整理房间","遛狗","通勤","办事"]},
+ {name:"餐食",strong:["早餐","午餐","晚餐","加餐","吃了","喝了","摄入"],keys:["米饭","面条","鸡胸","牛肉","蔬菜","水果","咖啡","奶茶","蛋白质","鸡蛋","酸奶"]}
 ];
 const foods=[
  {keys:["牛肉面"],label:"牛肉面",min:650,max:900,protein:28},
@@ -108,10 +119,14 @@ const foods=[
  {keys:["汉堡"],label:"汉堡",min:450,max:850,protein:24}
 ];
 function splitEntries(text){
- return text.split(/\n|[。；;]/).flatMap(part=>part.split(/(?=上午|中午|下午|晚上|早餐|午餐|晚餐|加餐)/)).map(x=>x.trim().replace(/^[，,、]+/,"")).filter(Boolean);
+ return text
+  .replace(/(然后|接着|随后|之后|另外|并且)/g,"。")
+  .split(/\n|[。；;]|[，,](?=(?:上午|中午|下午|晚上|睡|跑|跳|练|力量|有氧|健身|骑|游|工作|学习|看|读|早餐|午餐|晚餐|加餐|吃|喝|做家务|打扫|购物|洗衣))/)
+  .flatMap(part=>part.split(/(?=上午|中午|下午|晚上|早餐|午餐|晚餐|加餐)/))
+  .map(x=>x.trim().replace(/^[，,、]+/,"")).filter(Boolean);
 }
 function classify(text){
- const ranked=modules.map(module=>({name:module.name,score:module.keys.reduce((sum,key)=>sum+(text.includes(key)?1:0),0)})).sort((a,b)=>b.score-a.score);
+ const ranked=modules.map(module=>({name:module.name,score:module.strong.reduce((sum,key)=>sum+(text.includes(key)?4:0),0)+module.keys.reduce((sum,key)=>sum+(text.includes(key)?1:0),0)})).sort((a,b)=>b.score-a.score);
  return{module:ranked[0].score?ranked[0].name:"其他",confidence:ranked[0].score>1?"高":ranked[0].score?"中":"低"};
 }
 function mealEstimate(text){
@@ -120,7 +135,10 @@ function mealEstimate(text){
  return{foods:found.map(x=>x.label),min:found.reduce((n,x)=>n+x.min,0),max:found.reduce((n,x)=>n+x.max,0),protein:found.reduce((n,x)=>n+x.protein,0)};
 }
 function taskModule(task){
- if(task.area==="健康")return/餐|食/.test(task.text)?"餐食":"运动";
+ if(task.area==="健康"){
+  if(/餐|食/.test(task.text))return"餐食";
+  return/力量|健身|深蹲|卧推|硬拉|俯卧撑|器械|核心/.test(task.text)?"力量训练":"有氧运动";
+ }
  const inferred=classify(task.text).module;
  return inferred==="其他"?"工作":inferred;
 }
@@ -128,25 +146,56 @@ function findTask(module){
  const tasks=plan.logs[plan.currentDay].tasks;
  return tasks.find(task=>!task.done&&taskModule(task)===module)||null;
 }
+function readDuration(text,module){
+ const match=text.match(/(\d+(?:\.\d+)?)\s*(小时|个?钟头|h|分钟|分|min)/i);
+ if(!match)return 0;
+ const amount=Number(match[1]),hours=/小时|钟头|h/i.test(match[2]);
+ return module==="睡眠"?(hours?amount:amount/60):(hours?amount*60:amount);
+}
+function metricFor(text,module,meal){
+ if(module==="睡眠")return{value:readDuration(text,module),unit:"小时"};
+ if(["有氧运动","力量训练","工作","学习"].includes(module))return{value:readDuration(text,module),unit:"分钟"};
+ if(module==="生活")return{value:1,unit:"项"};
+ if(module==="餐食"){
+  const direct=text.match(/(\d+)\s*(?:千卡|大卡|kcal)/i);
+  return{value:direct?Number(direct[1]):meal?Math.round((meal.min+meal.max)/2):0,unit:"kcal"};
+ }
+ return{value:0,unit:""};
+}
 function localAnalyze(text,hasPhoto){
  const parts=splitEntries(text);
  if(!parts.length&&hasPhoto)parts.push("已上传餐食照片");
  return parts.map(part=>{
-  const result=classify(part),meal=result.module==="餐食"?mealEstimate(part):null,task=findTask(result.module);
-  return{id:String(Date.now()+Math.random()),text:part,module:result.module,confidence:hasPhoto&&part==="已上传餐食照片"?"待AI识别":result.confidence,createdAt:new Date().toISOString(),matchTaskId:task?.id||"",matchTaskText:task?.text||"",meal,photoName:hasPhoto?photoName:"",applied:false};
+  const result=classify(part),module=normalizeModule(result.module,part),meal=module==="餐食"?mealEstimate(part):null,task=findTask(module),metric=metricFor(part,module,meal);
+  return{id:String(Date.now()+Math.random()),text:part,module,confidence:hasPhoto&&part==="已上传餐食照片"?"待AI识别":result.confidence,createdAt:new Date().toISOString(),matchTaskId:task?.id||"",matchTaskText:task?.text||"",meal,metricValue:metric.value,metricUnit:metric.unit,photoName:hasPhoto?photoName:"",applied:false};
  });
 }
 async function analyzeWithAI(text,image){
  const response=await fetch(AI_ENDPOINT,{method:"POST",headers:{"content-type":"application/json"},body:JSON.stringify({text,image,plan:{name:plan.name,day:plan.currentDay,tasks:plan.logs[plan.currentDay].tasks,calorieTarget:plan.calorieTarget,proteinTarget:plan.proteinTarget}})});
  if(!response.ok)throw new Error("AI服务暂时不可用");
  const data=await response.json();
- return(data.items||[]).map(item=>({...item,id:String(Date.now()+Math.random()),createdAt:new Date().toISOString(),applied:false,photoName:photoName||""}));
+ return(data.items||[]).map(item=>{const module=normalizeModule(item.module,item.text),meal=item.meal||null,metric=metricFor(item.text||"",module,meal);return{...item,module,id:String(Date.now()+Math.random()),createdAt:new Date().toISOString(),metricValue:item.metricValue??metric.value,metricUnit:item.metricUnit||metric.unit,applied:false,photoName:photoName||""}});
 }
 function rates(){const all=Object.values(plan.logs).flatMap(x=>x.tasks),done=all.filter(x=>x.done).length,log=plan.logs[plan.currentDay];return{all,done,total:all.length,overall:all.length?Math.round(done/all.length*100):0,today:log.tasks.length?Math.round(log.tasks.filter(x=>x.done).length/log.tasks.length*100):0}}
+function moduleStats(log){
+ const totals={"睡眠":0,"餐食":log.calories||0,"有氧运动":0,"力量训练":0,"工作":0,"学习":0,"生活":0};
+ log.records.forEach(record=>{if(record.module!=="餐食"&&totals[record.module]!==undefined)totals[record.module]+=Number(record.metricValue)||0});
+ return[
+  {name:"睡眠",value:totals["睡眠"],target:plan.moduleGoals.sleep,unit:"小时",note:"恢复与食欲控制"},
+  {name:"餐食",value:totals["餐食"],target:plan.calorieTarget,unit:"kcal",note:`蛋白质 ${log.protein||0}/${plan.proteinTarget}g`,lower:true},
+  {name:"有氧运动",value:totals["有氧运动"],target:plan.moduleGoals.cardio,unit:"分钟",note:"跑步、跳绳、骑行等"},
+  {name:"力量训练",value:totals["力量训练"],target:plan.moduleGoals.strength,unit:"分钟",note:"抗阻、器械与自重"},
+  {name:"工作",value:totals["工作"],target:plan.moduleGoals.work,unit:"分钟",note:"剧本与科研项目"},
+  {name:"学习",value:totals["学习"],target:plan.moduleGoals.study,unit:"分钟",note:"课程、阅读与文献"},
+  {name:"生活",value:totals["生活"],target:plan.moduleGoals.life,unit:"项",note:"家务、社交与日常"}
+ ];
+}
 function recordDetail(record){
  const bits=[`可信度：${esc(record.confidence||"中")}`];
  if(record.matchTaskText)bits.push(`匹配计划：${esc(record.matchTaskText)}`);
  if(record.meal)bits.push(`估算 ${record.meal.min}–${record.meal.max} kcal，蛋白质约 ${record.meal.protein}g`);
+ if(record.metricValue&&record.module!=="餐食")bits.push(`量表记录：${Math.round(record.metricValue*10)/10}${esc(record.metricUnit||"")}`);
+ if(!record.metricValue&&["睡眠","有氧运动","力量训练","工作","学习"].includes(record.module))bits.push("未识别到时长，可在描述中加入“40分钟”");
  if(record.photoName&&!record.meal)bits.push("照片已接收，需连接AI或补充食物描述");
  return bits.join(" · ");
 }
@@ -155,7 +204,8 @@ function render(){
  $("planName").textContent=$("sideName").textContent=plan.name;$("dayNo").textContent=plan.currentDay;$("dayTotal").textContent=plan.days;$("sideRate").textContent=r.overall+"% 总进度";$("sideBar").style.width=r.overall+"%";$("todayRate").textContent=$("allRate").textContent=r.today+"%";
  $("ring").style.setProperty("--v",r.today*3.6+"deg");$("ringText").textContent=r.today+"%";$("encourage").textContent=r.today<50?"先完成最重要的一项，今天就会开始转动。":r.today<100?"已经进入状态，保持这个节奏。":"今天的承诺已经兑现。";
  $("tasks").innerHTML=log.tasks.map(t=>`<button class="task ${t.done?"done":""}" data-id="${esc(t.id)}"><i>${t.done?"✓":""}</i><span><small>${esc(t.area)}</small>${esc(t.text)}</span></button>`).join("");
- $("records").innerHTML=log.records.length?log.records.slice().reverse().map(record=>`<div class="record"><span class="module">${esc(record.module)}</span><div><p>${esc(record.text)}</p><small>${recordDetail(record)}</small></div><div class="record-actions">${record.matchTaskId&&!record.applied?`<button class="ghost apply-task" data-record="${esc(record.id)}">计入计划</button>`:""}${record.meal&&!record.applied?`<button class="ghost apply-meal" data-record="${esc(record.id)}">计入餐食</button>`:""}<button class="ghost remove-record" data-record="${esc(record.id)}">删除</button></div></div>`).join(""):'<p class="muted">还没有行动记录。写下今天做过的事情，系统会自动拆分并归类。</p>';
+ $("records").innerHTML=log.records.length?log.records.slice().reverse().map(record=>`<div class="record"><span class="module">${esc(record.module)}</span><div><p>${esc(record.text)}</p><small>${recordDetail(record)}</small></div><div class="record-actions">${record.matchTaskId&&!record.taskApplied?`<button class="ghost apply-task" data-record="${esc(record.id)}">计入计划</button>`:""}${record.meal&&!record.mealApplied?`<button class="ghost apply-meal" data-record="${esc(record.id)}">计入餐食</button>`:""}<button class="ghost remove-record" data-record="${esc(record.id)}">删除</button></div></div>`).join(""):'<p class="muted">还没有行动记录。写下今天做过的事情，系统会自动拆分并归类。</p>';
+ $("moduleScales").innerHTML=moduleStats(log).map(item=>{const percent=item.target?Math.round(item.value/item.target*100):0,shown=item.unit==="小时"?Math.round(item.value*10)/10:Math.round(item.value),state=item.lower&&percent>110?"over":percent>=100?"complete":"";return`<div class="scale ${state}"><div class="scale-head"><strong>${item.name}</strong><span>${Math.min(percent,999)}%</span></div><div class="scale-value">${shown} <small>/ ${item.target} ${item.unit}</small></div><div class="bar"><i style="width:${Math.min(percent,100)}%"></i></div><div class="scale-note">${item.note}</div></div>`}).join("");
  $("calNow").textContent=log.calories;$("calGoal").textContent="/ "+plan.calorieTarget+" kcal";$("proteinNow").textContent=log.protein;$("proteinGoal").textContent="/ "+plan.proteinTarget+" g 蛋白质";$("note").value=log.note||"";$("weight").value=log.weight||"";
  $("plan").innerHTML=Array.from({length:plan.days},(_,i)=>{const d=i+1,l=plan.logs[d],n=l.tasks.filter(t=>t.done).length;return`<button class="day ${d===plan.currentDay?"current":""}" data-day="${d}"><span>DAY ${String(d).padStart(2,"0")}</span><b>${n}/${l.tasks.length}</b><div class="bar"><i style="width:${n/l.tasks.length*100}%"></i></div></button>`}).join("");
  $("reviewTitle").textContent=r.done+" 项承诺已经兑现";$("reviewRate").textContent=r.overall+"%";$("reviewBar").style.width=r.overall+"%";$("reviewDay").textContent=plan.currentDay+" / "+plan.days+" 天";const noteList=Object.entries(plan.logs).filter(([,x])=>x.note);$("notes").innerHTML=noteList.length?noteList.map(([d,x])=>`<div class="note"><span>第${d}天</span><p>${esc(x.note)}</p></div>`).join(""):'<p class="muted">还没有复盘。每天留下一句话，就会在这里形成行动日志。</p>';
@@ -166,9 +216,9 @@ document.addEventListener("click",e=>{
  const task=e.target.closest(".task");if(task){const l=plan.logs[plan.currentDay],t=l.tasks.find(x=>x.id===task.dataset.id);t.done=!t.done;render()}
  const day=e.target.closest(".day");if(day){plan.currentDay=+day.dataset.day;show("today");render()}
  const action=e.target.closest("[data-record]");if(action){const log=plan.logs[plan.currentDay],record=log.records.find(x=>x.id===action.dataset.record);if(!record)return;
-  if(action.classList.contains("remove-record"))log.records=log.records.filter(x=>x.id!==record.id);
-  if(action.classList.contains("apply-task")){const match=log.tasks.find(x=>x.id===record.matchTaskId);if(match)match.done=true;record.applied=true}
-  if(action.classList.contains("apply-meal")){log.calories+=Math.round((record.meal.min+record.meal.max)/2);log.protein+=record.meal.protein;record.applied=true}
+  if(action.classList.contains("remove-record")){if(record.mealApplied){log.calories=Math.max(0,log.calories-(record.appliedCalories||0));log.protein=Math.max(0,log.protein-(record.appliedProtein||0))}log.records=log.records.filter(x=>x.id!==record.id)}
+  if(action.classList.contains("apply-task")){const match=log.tasks.find(x=>x.id===record.matchTaskId);if(match)match.done=true;record.taskApplied=true}
+  if(action.classList.contains("apply-meal")){record.appliedCalories=Math.round((record.meal.min+record.meal.max)/2);record.appliedProtein=record.meal.protein;log.calories+=record.appliedCalories;log.protein+=record.appliedProtein;record.mealApplied=true}
   render();
  }
 });
@@ -193,7 +243,7 @@ $("analyzeRecord").onclick=async()=>{
  }catch(error){$("recordStatus").className="record-status warn";$("recordStatus").textContent=error.message||"分析失败，请稍后重试。"}
  finally{$("analyzeRecord").disabled=false;$("analyzeRecord").textContent="分析并记录"}
 };
-$("newPlan").onclick=()=>$("modal").classList.remove("hidden");$("cancel").onclick=()=>$("modal").classList.add("hidden");$("createForm").onsubmit=e=>{e.preventDefault();const f=new FormData(e.target);plan=makePlan(f.get("name")||"我的计划",Math.max(3,Math.min(90,+f.get("days")||21)),+f.get("calories")||0,+f.get("protein")||0,+f.get("steps")||0);$("modal").classList.add("hidden");show("today");render()};
+$("newPlan").onclick=()=>$("modal").classList.remove("hidden");$("cancel").onclick=()=>$("modal").classList.add("hidden");$("createForm").onsubmit=e=>{e.preventDefault();const f=new FormData(e.target),goals={sleep:+f.get("sleep")||0,cardio:+f.get("cardio")||0,strength:+f.get("strength")||0,work:+f.get("work")||0,study:+f.get("study")||0,life:+f.get("life")||0};plan=makePlan(f.get("name")||"我的计划",Math.max(3,Math.min(90,+f.get("days")||21)),+f.get("calories")||0,+f.get("protein")||0,goals);$("modal").classList.add("hidden");show("today");render()};
 render();
 </script>
 </body>
