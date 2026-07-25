@@ -27,9 +27,10 @@
     textarea{min-height:120px;resize:vertical;margin-top:12px}.metric-row{display:flex;gap:10px;margin-top:15px}.metric{flex:1;background:#efeee8;border-radius:12px;padding:14px}.metric b{display:block;font:500 28px Georgia}.metric small{color:var(--muted)}
     .days{max-width:1240px;margin:auto;display:grid;grid-template-columns:repeat(7,1fr);gap:12px}.day{min-height:115px;background:var(--card);border:1px solid var(--line);border-radius:16px;padding:15px;text-align:left;display:flex;flex-direction:column}.day span{color:var(--muted);font-size:9px;letter-spacing:.1em}.day b{font:500 27px Georgia;margin:auto 0 10px}.day.current{border-color:var(--green);box-shadow:inset 0 0 0 1px var(--green)}
     .review{max-width:1240px;margin:auto;display:grid;grid-template-columns:repeat(3,1fr);gap:20px}.review .hero{grid-column:span 2;background:#e9efe9}.stat b{display:block;font:500 43px Georgia;margin:20px 0}.notes{grid-column:1/-1}.note{display:grid;grid-template-columns:80px 1fr;border-top:1px solid #e7e4dc;padding:14px 0}.note span{color:var(--muted);font-size:11px}.note p{margin:0}
+    .capture{grid-column:1/-1}.capture-grid{display:grid;grid-template-columns:minmax(0,1.4fr) minmax(260px,.6fr);gap:18px;margin-top:15px}.capture textarea{min-height:104px;margin:0}.capture-actions{display:flex;flex-wrap:wrap;gap:9px;margin-top:10px}.upload{display:inline-flex;align-items:center;gap:8px;border:1px solid #d8d7d0;background:#f7f5ef;border-radius:10px;padding:10px 13px;font-size:12px;cursor:pointer}.upload input{display:none}.preview{min-height:150px;border:1px dashed #c9ccc6;border-radius:15px;background:#f4f3ed;display:grid;place-items:center;overflow:hidden;color:var(--muted);font-size:12px;text-align:center;padding:12px}.preview img{width:100%;height:180px;object-fit:cover;border-radius:10px}.ai-note{margin-top:10px;color:var(--muted);font-size:11px}.records{margin-top:18px;border-top:1px solid #e7e4dc}.record{display:grid;grid-template-columns:92px 1fr auto;gap:12px;align-items:start;padding:14px 0;border-bottom:1px solid #ebe8e0}.module{width:max-content;border-radius:99px;padding:5px 9px;background:#e5eee8;color:var(--green);font-size:10px;font-weight:750}.record p{margin:0 0 5px;font-size:13px;line-height:1.55}.record small{color:var(--muted)}.record-actions{display:flex;gap:6px}.ghost{border:1px solid #d3d6d1;background:transparent;border-radius:8px;padding:7px 9px;font-size:11px}.record-status{margin-top:12px;padding:11px 13px;border-radius:10px;background:#e7efe9;color:#285442;font-size:12px}.record-status.warn{background:#fff0d5;color:#78511b}
     .modal-bg{position:fixed;inset:0;background:#0f1f1988;display:grid;place-items:center;padding:22px;z-index:10}.modal{width:min(620px,100%);background:var(--card);border-radius:24px;padding:32px}.modal label{display:grid;gap:7px;margin-top:14px;color:var(--muted);font-size:12px}.form-row{display:grid;grid-template-columns:1fr 1fr;gap:12px}.hidden{display:none!important}
     @media(max-width:850px){.app{grid-template-columns:76px 1fr}aside{padding:24px 12px}.brand div,.side-plan,.new{display:none}.brand{padding-inline:0}nav button{font-size:0;text-align:center}nav button:before{font-size:18px}.days{grid-template-columns:repeat(4,1fr)}}
-    @media(max-width:650px){.app{display:block;padding-bottom:65px}aside{position:fixed;inset:auto 0 0;width:100%;height:60px;z-index:5;flex-direction:row;padding:7px 14px}.brand{display:none}nav{width:100%;grid-template-columns:repeat(3,1fr)}nav button{font-size:13px;text-align:center}.workspace{padding:28px 16px 40px}.top{display:block}.stepper{margin-top:18px;width:max-content}.grid,.review{grid-template-columns:1fr}.pulse{order:-1}.meal{grid-template-columns:1fr 1fr}.meal select,.meal .primary,.check{grid-column:1/-1}.days{grid-template-columns:repeat(3,1fr)}.review .hero,.notes{grid-column:auto}.form-row{grid-template-columns:1fr}}
+    @media(max-width:650px){.app{display:block;padding-bottom:65px}aside{position:fixed;inset:auto 0 0;width:100%;height:60px;z-index:5;flex-direction:row;padding:7px 14px}.brand{display:none}nav{width:100%;grid-template-columns:repeat(3,1fr)}nav button{font-size:13px;text-align:center}.workspace{padding:28px 16px 40px}.top{display:block}.stepper{margin-top:18px;width:max-content}.grid,.review,.capture-grid{grid-template-columns:1fr}.pulse{order:-1}.meal{grid-template-columns:1fr 1fr}.meal select,.meal .primary,.check{grid-column:1/-1}.days{grid-template-columns:repeat(3,1fr)}.review .hero,.notes{grid-column:auto}.form-row{grid-template-columns:1fr}.record{grid-template-columns:1fr}.record-actions{justify-content:flex-start}}
   </style>
 </head>
 <body>
@@ -43,6 +44,7 @@
   <main class="workspace">
     <header class="top"><div><span class="kicker" id="planName"></span><h1 id="headline">把今天做好。</h1></div><div class="stepper"><button id="prev">‹</button><span>第 <b id="dayNo">1</b> / <i id="dayTotal">21</i> 天</span><button id="next">›</button></div></header>
     <section id="today" class="grid">
+      <div class="card capture"><div class="head"><div><span class="tag">智能记录</span><h2>今天做了什么？</h2></div><span class="score">自动归类</span></div><div class="capture-grid"><div><textarea id="dailyInput" placeholder="例如：上午修改了剧本第二幕，下午跳绳40分钟，晚餐吃了鸡胸肉、米饭和西兰花。"></textarea><div class="capture-actions"><button class="primary" id="analyzeRecord">分析并记录</button><label class="upload">＋ 上传餐食照片<input id="foodPhoto" type="file" accept="image/*" capture="environment"></label><button class="ghost" id="clearCapture">清空</button></div><div class="ai-note">文字会立即在本机归类；照片识别接口未连接时，可配合食物描述生成热量区间。</div><div id="recordStatus"></div></div><div class="preview" id="photoPreview">上传餐食照片后将在这里预览<br>图片不会保存在浏览器记录中</div></div><div class="records" id="records"></div></div>
       <div class="card"><div class="head"><div><span class="tag">今日重点</span><h2>完成清单</h2></div><span class="score" id="todayRate">0%</span></div><div class="tasks" id="tasks"></div><div class="add"><input id="newTask" placeholder="添加今天自己的任务…"><button id="addTask">添加</button></div></div>
       <div class="card pulse"><span class="tag">今日节奏</span><div class="ring" id="ring"><b id="ringText">0%</b></div><p id="encourage">先完成最重要的一项，今天就会开始转动。</p></div>
       <div class="card"><div class="head"><div><span class="tag">可选模块</span><h2>餐食反馈</h2></div></div><div class="summary"><div><b id="calNow">0</b><span id="calGoal"></span></div><div><b id="proteinNow">0</b><span id="proteinGoal"></span></div></div><div class="meal"><select id="mealType"><option>早餐</option><option selected>午餐</option><option>加餐</option><option>晚餐</option></select><input id="mealCal" inputmode="numeric" placeholder="热量 kcal"><input id="mealPro" inputmode="numeric" placeholder="蛋白质 g"><label class="check"><input id="veg" type="checkbox" checked>含足量蔬菜</label><button class="primary" id="evaluate">评估并记录</button></div><div id="feedback"></div></div>
@@ -54,37 +56,143 @@
 </div>
 <div class="modal-bg hidden" id="modal"><form class="modal" id="createForm"><span class="tag">从一个清晰的周期开始</span><h2>创建新计划</h2><label>计划名称<input name="name" value="我的21天冲刺"></label><div class="form-row"><label>周期天数<input name="days" type="number" min="3" max="90" value="21"></label><label>每日热量目标<input name="calories" type="number" min="0" value="2200"></label></div><div class="form-row"><label>蛋白质目标（克）<input name="protein" type="number" min="0" value="180"></label><label>步数目标<input name="steps" type="number" min="0" value="12000"></label></div><p class="muted">创建新计划会替换当前计划。</p><div class="form-row"><button type="button" id="cancel">取消</button><button class="primary" type="submit">创建并开始</button></div></form></div>
 <script>
-const KEY="rhythm-static-v1";
+const KEY="my-planner-v2",OLD_KEY="rhythm-static-v1";
+const AI_ENDPOINT=window.MY_PLANNER_AI_ENDPOINT||"";
 const seed=[
  ["45分钟低强度有氧","完成一次力量训练","推进核心项目90分钟","完成一项研究或学习任务"],
  ["户外快走60分钟","整理并执行今日餐食","完成一个可验收成果","阅读并记录3条笔记"],
  ["核心与活动度训练","复盘身体状态","修改一处关键结构","整理问题与假设"]
 ];
 function makePlan(name="21天集中冲刺",days=21,calories=2200,protein=180,steps=12000){
- const logs={};for(let d=1;d<=days;d++)logs[d]={tasks:seed[(d-1)%seed.length].map((text,i)=>({id:d+"-"+i,text,area:i<2?"健康":"项目",done:false})),calories:0,protein:0,note:"",weight:""};
+ const logs={};for(let d=1;d<=days;d++)logs[d]={tasks:seed[(d-1)%seed.length].map((text,i)=>({id:d+"-"+i,text,area:i<2?"健康":"项目",done:false})),calories:0,protein:0,note:"",weight:"",records:[]};
  return{name,days,currentDay:1,calorieTarget:calories,proteinTarget:protein,stepsTarget:steps,logs};
 }
-let plan;try{plan=JSON.parse(localStorage.getItem(KEY))||makePlan()}catch(e){plan=makePlan()}
-let active="today";const $=id=>document.getElementById(id);const save=()=>localStorage.setItem(KEY,JSON.stringify(plan));
+function hydratePlan(value){
+ const next=value||makePlan();
+ for(let d=1;d<=next.days;d++){
+  if(!next.logs[d])next.logs[d]=makePlan("x",1).logs[1];
+  if(!Array.isArray(next.logs[d].records))next.logs[d].records=[];
+ }
+ return next;
+}
+let plan;try{plan=hydratePlan(JSON.parse(localStorage.getItem(KEY)||localStorage.getItem(OLD_KEY)))}catch(e){plan=makePlan()}
+let active="today",photoData="",photoName="";
+const $=id=>document.getElementById(id),save=()=>localStorage.setItem(KEY,JSON.stringify(plan));
+const esc=value=>String(value??"").replace(/[&<>"']/g,char=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[char]));
+const modules=[
+ {name:"餐食",keys:["早餐","午餐","晚餐","加餐","吃了","喝了","米饭","面","鸡胸","牛肉","蔬菜","水果","咖啡","奶茶","蛋白"]},
+ {name:"运动",keys:["训练","健身","跑步","跳绳","有氧","力量","深蹲","俯卧撑","走路","步行","瑜伽","拉伸","骑行","游泳"]},
+ {name:"剧本",keys:["剧本","第二幕","第一幕","第三幕","场景","对白","角色","情节","分场","台词","修改结构"]},
+ {name:"科研",keys:["科研","研究","论文","文献","实验","假设","课题","数据","模型","方法","构思"]},
+ {name:"工作",keys:["工作","项目","会议","邮件","汇报","方案","交付","客户","整理"]},
+ {name:"学习",keys:["学习","阅读","课程","笔记","背诵","练习","复习"]},
+ {name:"恢复",keys:["睡眠","午睡","休息","冥想","泡沫轴","恢复","早睡"]},
+ {name:"生活",keys:["家务","打扫","购物","洗衣","做饭","散步","社交"]}
+];
+const foods=[
+ {keys:["牛肉面"],label:"牛肉面",min:650,max:900,protein:28},
+ {keys:["鸡胸肉","鸡胸"],label:"鸡胸肉",min:180,max:300,protein:35},
+ {keys:["米饭"],label:"米饭",min:180,max:320,protein:5},
+ {keys:["西兰花"],label:"西兰花",min:40,max:100,protein:4},
+ {keys:["鸡蛋","煎蛋","水煮蛋"],label:"鸡蛋",min:70,max:120,protein:7},
+ {keys:["沙拉"],label:"沙拉",min:120,max:350,protein:6},
+ {keys:["奶茶"],label:"奶茶",min:350,max:650,protein:4},
+ {keys:["咖啡"],label:"咖啡",min:5,max:250,protein:1},
+ {keys:["面包"],label:"面包",min:180,max:420,protein:8},
+ {keys:["酸奶"],label:"酸奶",min:100,max:260,protein:8},
+ {keys:["牛奶"],label:"牛奶",min:100,max:180,protein:8},
+ {keys:["香蕉"],label:"香蕉",min:80,max:130,protein:1},
+ {keys:["苹果"],label:"苹果",min:60,max:120,protein:0},
+ {keys:["火锅"],label:"火锅",min:800,max:1500,protein:45},
+ {keys:["炒饭"],label:"炒饭",min:550,max:900,protein:18},
+ {keys:["汉堡"],label:"汉堡",min:450,max:850,protein:24}
+];
+function splitEntries(text){
+ return text.split(/\n|[。；;]/).flatMap(part=>part.split(/(?=上午|中午|下午|晚上|早餐|午餐|晚餐|加餐)/)).map(x=>x.trim().replace(/^[，,、]+/,"")).filter(Boolean);
+}
+function classify(text){
+ const ranked=modules.map(module=>({name:module.name,score:module.keys.reduce((sum,key)=>sum+(text.includes(key)?1:0),0)})).sort((a,b)=>b.score-a.score);
+ return{module:ranked[0].score?ranked[0].name:"其他",confidence:ranked[0].score>1?"高":ranked[0].score?"中":"低"};
+}
+function mealEstimate(text){
+ const found=foods.filter(food=>food.keys.some(key=>text.includes(key)));
+ if(!found.length)return null;
+ return{foods:found.map(x=>x.label),min:found.reduce((n,x)=>n+x.min,0),max:found.reduce((n,x)=>n+x.max,0),protein:found.reduce((n,x)=>n+x.protein,0)};
+}
+function taskModule(task){
+ if(task.area==="健康")return/餐|食/.test(task.text)?"餐食":"运动";
+ const inferred=classify(task.text).module;
+ return inferred==="其他"?"工作":inferred;
+}
+function findTask(module){
+ const tasks=plan.logs[plan.currentDay].tasks;
+ return tasks.find(task=>!task.done&&taskModule(task)===module)||null;
+}
+function localAnalyze(text,hasPhoto){
+ const parts=splitEntries(text);
+ if(!parts.length&&hasPhoto)parts.push("已上传餐食照片");
+ return parts.map(part=>{
+  const result=classify(part),meal=result.module==="餐食"?mealEstimate(part):null,task=findTask(result.module);
+  return{id:String(Date.now()+Math.random()),text:part,module:result.module,confidence:hasPhoto&&part==="已上传餐食照片"?"待AI识别":result.confidence,createdAt:new Date().toISOString(),matchTaskId:task?.id||"",matchTaskText:task?.text||"",meal,photoName:hasPhoto?photoName:"",applied:false};
+ });
+}
+async function analyzeWithAI(text,image){
+ const response=await fetch(AI_ENDPOINT,{method:"POST",headers:{"content-type":"application/json"},body:JSON.stringify({text,image,plan:{name:plan.name,day:plan.currentDay,tasks:plan.logs[plan.currentDay].tasks,calorieTarget:plan.calorieTarget,proteinTarget:plan.proteinTarget}})});
+ if(!response.ok)throw new Error("AI服务暂时不可用");
+ const data=await response.json();
+ return(data.items||[]).map(item=>({...item,id:String(Date.now()+Math.random()),createdAt:new Date().toISOString(),applied:false,photoName:photoName||""}));
+}
 function rates(){const all=Object.values(plan.logs).flatMap(x=>x.tasks),done=all.filter(x=>x.done).length,log=plan.logs[plan.currentDay];return{all,done,total:all.length,overall:all.length?Math.round(done/all.length*100):0,today:log.tasks.length?Math.round(log.tasks.filter(x=>x.done).length/log.tasks.length*100):0}}
+function recordDetail(record){
+ const bits=[`可信度：${esc(record.confidence||"中")}`];
+ if(record.matchTaskText)bits.push(`匹配计划：${esc(record.matchTaskText)}`);
+ if(record.meal)bits.push(`估算 ${record.meal.min}–${record.meal.max} kcal，蛋白质约 ${record.meal.protein}g`);
+ if(record.photoName&&!record.meal)bits.push("照片已接收，需连接AI或补充食物描述");
+ return bits.join(" · ");
+}
 function render(){
  const log=plan.logs[plan.currentDay],r=rates();
  $("planName").textContent=$("sideName").textContent=plan.name;$("dayNo").textContent=plan.currentDay;$("dayTotal").textContent=plan.days;$("sideRate").textContent=r.overall+"% 总进度";$("sideBar").style.width=r.overall+"%";$("todayRate").textContent=$("allRate").textContent=r.today+"%";
  $("ring").style.setProperty("--v",r.today*3.6+"deg");$("ringText").textContent=r.today+"%";$("encourage").textContent=r.today<50?"先完成最重要的一项，今天就会开始转动。":r.today<100?"已经进入状态，保持这个节奏。":"今天的承诺已经兑现。";
- $("tasks").innerHTML=log.tasks.map(t=>`<button class="task ${t.done?"done":""}" data-id="${t.id}"><i>${t.done?"✓":""}</i><span><small>${t.area}</small>${t.text}</span></button>`).join("");
+ $("tasks").innerHTML=log.tasks.map(t=>`<button class="task ${t.done?"done":""}" data-id="${esc(t.id)}"><i>${t.done?"✓":""}</i><span><small>${esc(t.area)}</small>${esc(t.text)}</span></button>`).join("");
+ $("records").innerHTML=log.records.length?log.records.slice().reverse().map(record=>`<div class="record"><span class="module">${esc(record.module)}</span><div><p>${esc(record.text)}</p><small>${recordDetail(record)}</small></div><div class="record-actions">${record.matchTaskId&&!record.applied?`<button class="ghost apply-task" data-record="${esc(record.id)}">计入计划</button>`:""}${record.meal&&!record.applied?`<button class="ghost apply-meal" data-record="${esc(record.id)}">计入餐食</button>`:""}<button class="ghost remove-record" data-record="${esc(record.id)}">删除</button></div></div>`).join(""):'<p class="muted">还没有行动记录。写下今天做过的事情，系统会自动拆分并归类。</p>';
  $("calNow").textContent=log.calories;$("calGoal").textContent="/ "+plan.calorieTarget+" kcal";$("proteinNow").textContent=log.protein;$("proteinGoal").textContent="/ "+plan.proteinTarget+" g 蛋白质";$("note").value=log.note||"";$("weight").value=log.weight||"";
  $("plan").innerHTML=Array.from({length:plan.days},(_,i)=>{const d=i+1,l=plan.logs[d],n=l.tasks.filter(t=>t.done).length;return`<button class="day ${d===plan.currentDay?"current":""}" data-day="${d}"><span>DAY ${String(d).padStart(2,"0")}</span><b>${n}/${l.tasks.length}</b><div class="bar"><i style="width:${n/l.tasks.length*100}%"></i></div></button>`}).join("");
- $("reviewTitle").textContent=r.done+" 项承诺已经兑现";$("reviewRate").textContent=r.overall+"%";$("reviewBar").style.width=r.overall+"%";$("reviewDay").textContent=plan.currentDay+" / "+plan.days+" 天";const noteList=Object.entries(plan.logs).filter(([,x])=>x.note);$("notes").innerHTML=noteList.length?noteList.map(([d,x])=>`<div class="note"><span>第${d}天</span><p>${x.note}</p></div>`).join(""):'<p class="muted">还没有复盘。每天留下一句话，就会在这里形成行动日志。</p>';
+ $("reviewTitle").textContent=r.done+" 项承诺已经兑现";$("reviewRate").textContent=r.overall+"%";$("reviewBar").style.width=r.overall+"%";$("reviewDay").textContent=plan.currentDay+" / "+plan.days+" 天";const noteList=Object.entries(plan.logs).filter(([,x])=>x.note);$("notes").innerHTML=noteList.length?noteList.map(([d,x])=>`<div class="note"><span>第${d}天</span><p>${esc(x.note)}</p></div>`).join(""):'<p class="muted">还没有复盘。每天留下一句话，就会在这里形成行动日志。</p>';
  save();
 }
 function show(tab){active=tab;["today","plan","review"].forEach(id=>$(id).classList.toggle("hidden",id!==tab));document.querySelectorAll("nav button").forEach(b=>b.classList.toggle("active",b.dataset.tab===tab));$("headline").textContent=tab==="today"?"把今天做好。":tab==="plan"?"看清整段旅程。":"让数据帮你调整。"}
-document.addEventListener("click",e=>{const task=e.target.closest(".task");if(task){const l=plan.logs[plan.currentDay],t=l.tasks.find(x=>x.id===task.dataset.id);t.done=!t.done;render()}const day=e.target.closest(".day");if(day){plan.currentDay=+day.dataset.day;show("today");render()}});
+document.addEventListener("click",e=>{
+ const task=e.target.closest(".task");if(task){const l=plan.logs[plan.currentDay],t=l.tasks.find(x=>x.id===task.dataset.id);t.done=!t.done;render()}
+ const day=e.target.closest(".day");if(day){plan.currentDay=+day.dataset.day;show("today");render()}
+ const action=e.target.closest("[data-record]");if(action){const log=plan.logs[plan.currentDay],record=log.records.find(x=>x.id===action.dataset.record);if(!record)return;
+  if(action.classList.contains("remove-record"))log.records=log.records.filter(x=>x.id!==record.id);
+  if(action.classList.contains("apply-task")){const match=log.tasks.find(x=>x.id===record.matchTaskId);if(match)match.done=true;record.applied=true}
+  if(action.classList.contains("apply-meal")){log.calories+=Math.round((record.meal.min+record.meal.max)/2);log.protein+=record.meal.protein;record.applied=true}
+  render();
+ }
+});
 document.querySelectorAll("nav button").forEach(b=>b.onclick=()=>show(b.dataset.tab));
 $("prev").onclick=()=>{plan.currentDay=Math.max(1,plan.currentDay-1);render()};$("next").onclick=()=>{plan.currentDay=Math.min(plan.days,plan.currentDay+1);render()};
 $("addTask").onclick=()=>{const v=$("newTask").value.trim();if(!v)return;plan.logs[plan.currentDay].tasks.push({id:Date.now()+"",text:v,area:"自定义",done:false});$("newTask").value="";render()};
 $("newTask").onkeydown=e=>{if(e.key==="Enter")$("addTask").click()};
 $("note").oninput=e=>{plan.logs[plan.currentDay].note=e.target.value;save()};$("weight").oninput=e=>{plan.logs[plan.currentDay].weight=e.target.value;save()};
 $("evaluate").onclick=()=>{const cal=+$("mealCal").value,pro=+$("mealPro").value,type=$("mealType").value,share=type==="加餐"?.12:type==="早餐"?.24:.32,cg=plan.calorieTarget*share,pg=plan.proteinTarget*share;let tone="green",title="这餐整体合适",text="热量与蛋白质处于当前计划的合理范围。";if(!cal||!pro){tone="amber";title="还缺一点信息";text="请填写大致热量和蛋白质。"}else if(cal>cg*1.25){tone="red";title="热量偏高";text=`比本餐参考值高约 ${Math.round(cal-cg)} 千卡，优先检查油、酱料和主食。`}else if(cal<cg*.68){tone="amber";title="可能吃得太少";text="如有训练或高强度工作，建议补充主食或低脂蛋白质。"}else if(pro<pg*.72){tone="amber";title="蛋白质不足";text=`建议再补约 ${Math.ceil(pg-pro)} 克蛋白质。`}else if(type!=="加餐"&&!$("veg").checked){tone="amber";title="主体合适，蔬菜不足";text="增加一大份非淀粉蔬菜。"}if(cal&&pro){const l=plan.logs[plan.currentDay];l.calories+=cal;l.protein+=pro}$("feedback").className="feedback "+tone;$("feedback").innerHTML=`<strong>${title}</strong><p>${text}</p>`;render()};
+$("foodPhoto").onchange=e=>{const file=e.target.files?.[0];if(!file)return;photoName=file.name;const reader=new FileReader();reader.onload=event=>{photoData=event.target.result;$("photoPreview").innerHTML=`<img src="${photoData}" alt="待评估餐食照片">`};reader.readAsDataURL(file)};
+$("clearCapture").onclick=()=>{$("dailyInput").value="";$("foodPhoto").value="";photoData="";photoName="";$("photoPreview").innerHTML="上传餐食照片后将在这里预览<br>图片不会保存在浏览器记录中";$("recordStatus").className="";$("recordStatus").textContent=""};
+$("analyzeRecord").onclick=async()=>{
+ const text=$("dailyInput").value.trim();if(!text&&!photoData){$("recordStatus").className="record-status warn";$("recordStatus").textContent="请先写下一件事或上传一张餐食照片。";return}
+ $("analyzeRecord").disabled=true;$("analyzeRecord").textContent="分析中…";
+ try{
+  const items=AI_ENDPOINT?await analyzeWithAI(text,photoData):localAnalyze(text,Boolean(photoData));
+  plan.logs[plan.currentDay].records.push(...items);
+  const named=[...new Set(items.map(x=>x.module))].join("、");
+  $("recordStatus").className="record-status"+(!AI_ENDPOINT&&photoData&&!text?" warn":"");
+  $("recordStatus").textContent=AI_ENDPOINT?`AI 已识别 ${items.length} 条记录，归入：${named}。`:`已在本机识别 ${items.length} 条记录，归入：${named}。${photoData&&!text?" 照片热量需要AI识别或补充文字描述。":""}`;
+  $("dailyInput").value="";render();
+ }catch(error){$("recordStatus").className="record-status warn";$("recordStatus").textContent=error.message||"分析失败，请稍后重试。"}
+ finally{$("analyzeRecord").disabled=false;$("analyzeRecord").textContent="分析并记录"}
+};
 $("newPlan").onclick=()=>$("modal").classList.remove("hidden");$("cancel").onclick=()=>$("modal").classList.add("hidden");$("createForm").onsubmit=e=>{e.preventDefault();const f=new FormData(e.target);plan=makePlan(f.get("name")||"我的计划",Math.max(3,Math.min(90,+f.get("days")||21)),+f.get("calories")||0,+f.get("protein")||0,+f.get("steps")||0);$("modal").classList.add("hidden");show("today");render()};
 render();
 </script>
